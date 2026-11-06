@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- All medication rules (dose marking, validation, day rollover) live as pure functions in `src/lib/med-logic.ts`; the React store in `src/lib/med-store.tsx` only wraps them. Why: keeps rules testable without rendering.
+- App data is client-side only (seeded, persisted to localStorage) and pages render behind `ReadyGate` after mount. Why: data and clock are browser-local, avoiding SSR hydration mismatches.
